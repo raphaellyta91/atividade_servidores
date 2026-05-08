@@ -1,5 +1,4 @@
 import express from 'express'
-import path from 'path'
 import {listarCursos, criarCurso} from '../controllers/controllerCurso.js'
 
 const routCurso = express.Router()
