@@ -1,6 +1,6 @@
 import express from 'express'
 import path from 'path'
-import express from 'express'
+import {listarCursos, criarCurso} from '../controllers/controllerCurso.js'
 
 const routCurso = express.Router()
 
@@ -13,9 +13,7 @@ let cursos = [
 ]
 
 // Listar cursos
-routCurso.get('/cursos', (req, res) => {
-    res.status(200).json(cursos)
-})
+routCurso.get('/cursos', listarCursos)
 
 // Buscar curso pelo código
 routCurso.get('/curso/:codigo', (req, res) => {
@@ -31,28 +29,7 @@ routCurso.get('/curso/:codigo', (req, res) => {
 })
 
 // Cadastrar curso
-routCurso.post('/curso', (req, res) => {
-    const { codigo, nome, cargaHoraria } = req.body
-
-    if (!codigo || !nome || !cargaHoraria) {
-        return res.status(400).json({
-            mensagem: 'Preencha todos os dados!'
-        })
-    }
-
-    const novoCurso = {
-        codigo,
-        nome,
-        cargaHoraria
-    }
-
-    cursos.push(novoCurso)
-
-    res.status(200).json({
-        mensagem: 'Curso cadastrado com sucesso!',
-        novoCurso
-    })
-})
+routCurso.post('/curso', criarCurso)
 
 // Atualizar curso
 routCurso.put('/curso/:codigo', (req, res) => {
